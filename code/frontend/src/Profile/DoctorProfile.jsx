@@ -9,18 +9,14 @@ import {
   Typography,
   Box,
   Grid,
-  List,
-  ListItem,
-  ListItemText,
   IconButton,
   Stack,
   Paper,
-  Icon,
 } from "@mui/material";
-import { AttachMoney, Favorite, Message } from "@mui/icons-material";
+import MessageIcon from "@mui/icons-material/Message";
+
 import StarIcon from "@mui/icons-material/Star";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import FacebookIcon from "@mui/icons-material/Facebook";
 
 function DoctorProfile() {
   return (
@@ -63,7 +59,7 @@ function DoctorProfile() {
               sx={{ display: "flex", justifyContent: "flex-end" }}
             >
               <Box mt={2} mr={2} height="50px" sx={{ display: "flex", gap: 2 }}>
-                <Button variant="contained" startIcon={<Message />}>
+                <Button variant="contained" startIcon={<MessageIcon />}>
                   Send message
                 </Button>
                 <Button variant="contained" color="primary" ml={2}>
