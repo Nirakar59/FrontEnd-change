@@ -39,9 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'account',
+    'channels',
+    'chat',
+    
     'rest_framework',
     'rest_framework_simplejwt',
-    'corsheaders',  
+    'corsheaders',
+
       
 ]
 
@@ -169,3 +173,19 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
+# Add the channel layers configuration
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
+
+# Set ASGI application
+ASGI_APPLICATION = 'susthiti.asgi.application'
+
+
+# chat application 
+ASGI_APPLICATION = 'susthiti.asgi.application'
