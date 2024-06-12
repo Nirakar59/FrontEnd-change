@@ -54,3 +54,43 @@ class PostRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
             raise PermissionDenied("You do not have permission to delete this post.")
         
         return super().destroy(request, *args, **kwargs)
+
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
+from .models import Comment  # Import the Comment model
+from .serializers import CommentSerializer
+
+class CommentListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]  # Ensure only authenticated users can comment
+
+    def get_queryset(self):
+        # Filter comments based on the post_id from URL parameters
+        post_id = self.kwargs['post_id']
+        return Comment.objects.filter(post_id=post_id)
+
+    def perform_create(self, serializer):
+        # Automatically set the user and post for the new comment
+        serializer.save(user=self.request.user, post_id=self.kwargs['post_id'])
+
+from rest_framework.views import APIView
+
+
+class AllPosts(APIView):
+    def get(self, request):
+        try:
+            posts = Post.objects.all()
+            posts_data = []
+            for post in posts:
+                post_serializer = PostSerializer(post)
+                comments = post.comments.all()
+                comment_serializer = CommentSerializer(comments, many=True)
+                post_data = {
+                    'post': post_serializer.data,
+                    'comments': comment_serializer.data
+                }
+                posts_data.append(post_data)
+            return Response(posts_data, status=status.HTTP_200_OK)
+        except Post.DoesNotExist:
+            return Response({'error': 'No posts found'}, status=status.HTTP_404_NOT_FOUND)

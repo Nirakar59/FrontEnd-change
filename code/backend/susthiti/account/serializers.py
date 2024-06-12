@@ -49,3 +49,12 @@ class MediatatorTeacherProfileSerializer(serializers.ModelSerializer):
             # If the instance exists (i.e., updating), treat the required fields as optional
             for field_name in self.fields.keys():
                 self.fields[field_name].required = False
+                
+                
+from rest_framework import serializers
+from .models import FreeTimeSlot
+
+class FreeTimeSlotSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FreeTimeSlot
+        fields = ['id', 'start_time', 'end_time']

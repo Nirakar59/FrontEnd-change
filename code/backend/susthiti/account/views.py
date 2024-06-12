@@ -72,3 +72,32 @@ class UserDeleteAPIView(APIView):
         user.delete()  # This will delete the user and cascade to related models
 
         return Response({"message": "Account deleted successfully."})
+    
+    
+    
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
+from .models import FreeTimeSlot
+from .serializers import FreeTimeSlotSerializer
+
+class FreeTimeSlotListCreateAPIView(generics.ListCreateAPIView):
+    queryset = FreeTimeSlot.objects.all()
+    serializer_class = FreeTimeSlotSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # Filter free time slots for the currently authenticated doctor or teacher
+        return self.queryset.filter(doctor_or_teacher=self.request.user)
+
+    def perform_create(self, serializer):
+        # Associate the currently authenticated user (doctor or teacher) with the free time slot
+        serializer.save(doctor_or_teacher=self.request.user)
+
+class FreeTimeSlotRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = FreeTimeSlot.objects.all()
+    serializer_class = FreeTimeSlotSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # Filter free time slots for the currently authenticated doctor or teacher
+        return self.queryset.filter(doctor_or_teacher=self.request.user)
