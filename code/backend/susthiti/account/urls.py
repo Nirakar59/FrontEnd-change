@@ -20,5 +20,5 @@ urlpatterns = [
     path('free-time-slots/', FreeTimeSlotListCreateAPIView.as_view(), name='free-time-slot-list-create'),
     path('free-time-slots/<int:pk>/', FreeTimeSlotRetrieveUpdateDestroyAPIView.as_view(), name='free-time-slot-detail'),
     
-    #####
+    #########
 ]
