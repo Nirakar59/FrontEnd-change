@@ -38,9 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    'account',
+    'channels',
+    'chat',
+    
     'rest_framework',
     'rest_framework_simplejwt',
-    'corsheaders',  
+    'corsheaders',
+
       
 ]
 
@@ -141,9 +146,43 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'f25836105@gmail.com'
 EMAIL_HOST_PASSWORD = 'bvjo jzkz jzae qvkn'
 
+
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
+
+
+# overrided settings starts here
+
+AUTH_USER_MODEL = 'account.UserData'
+
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=15),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
+  }
+
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",       
+    "http://localhost:3000",
+]
+
+# Add the channel layers configuration
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
+
+# Set ASGI application
+ASGI_APPLICATION = 'susthiti.asgi.application'
 
