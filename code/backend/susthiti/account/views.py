@@ -62,3 +62,13 @@ class MediatatorTeacherProfileRetrieveUpdateDestroy(generics.RetrieveUpdateDestr
     queryset = MediatatorTeacherProfile.objects.all()
     serializer_class = MediatatorTeacherProfileSerializer
     permission_classes = [IsOwnerOrAdmin, IsAuthenticated]
+    
+    
+class UserDeleteAPIView(APIView):
+    permission_classes = [IsAuthenticated, IsOwnerOrAdmin]
+
+    def delete(self, request, *args, **kwargs):
+        user = request.user
+        user.delete()  # This will delete the user and cascade to related models
+
+        return Response({"message": "Account deleted successfully."})
