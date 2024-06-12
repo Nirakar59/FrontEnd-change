@@ -92,6 +92,7 @@ class DoctorProfile(models.Model):
     email = models.EmailField(max_length=100)
     first_name = models.CharField(max_length=125)
     last_name = models.CharField(max_length=125)
+    rating = models.FloatField(null=True)
     
     password_reset_token = models.CharField(max_length=100, blank=True, null=True)
     password_reset_token_generated_time = models.DateTimeField(blank=True, null=True) 
@@ -120,6 +121,8 @@ class AnnonymousUser(models.Model):
     image = models.ImageField(upload_to='user/profile_images/', null=True, blank=True)
     address = models.CharField(max_length=100, blank=True)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
+    dob = models.DateTimeField(null=True)
+    aptitude_test_score = models.FloatField(null=True)
 
     def save(self, *args, **kwargs):
         if not self.username:
@@ -132,6 +135,7 @@ class AnnonymousUser(models.Model):
 class MediatatorTeacherProfile(models.Model):
     user = models.ForeignKey(UserData, on_delete=models.CASCADE, related_name='mediatator_teacher_profiles')
     teacher_id = models.AutoField(primary_key=True, unique=True)
+    
     
     username = models.CharField(max_length=125, unique=True)
     email = models.EmailField(max_length=100)
