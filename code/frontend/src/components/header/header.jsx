@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Close as CloseIcon } from "@material-ui/icons";
-
+import Notification from "../Notifications/Notifications";
 import {
   AppBar,
   Toolbar,
@@ -240,10 +240,9 @@ const Header = () => {
                   alignItems: "center",
                 }}
               >
-                <Link to="/cart/details" className={classes.cartLink}>
-                  <ShoppingCart className={classes.cartIcon} />
-                  <span className={classes.cartText}></span>
-                </Link>
+
+<Notification/>
+               
                 {/* <Notifications /> */}
                 &nbsp;
                 {!isMobile && (

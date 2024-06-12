@@ -1,62 +1,64 @@
 import React, { useState, useEffect } from 'react';
-import tips from './TipsCards.json';
-// import './TipsCards.css'
+import Snackbar from '@mui/material/Snackbar';
+import SnackbarContent from '@mui/material/SnackbarContent';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+
+const quotes = [
+  "Practice mindfulness daily for inner peace and clarity.",
+  "Connect with loved ones for support and companionship.",
+  "Engage in regular physical activity for mental well-being.",
+  "Prioritize sufficient sleep for cognitive function and emotional balance.",
+  "Limit screen time to reduce stress and improve sleep quality.",
+  // Add more quotes as needed
+];
 
 const TipsCards = () => {
-  const [currentTipIndex, setCurrentTipIndex] = useState(0);
-  const [showTips, setShowTips] = useState(true);
+  const [open, setOpen] = useState(true);
+  const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleExited = () => {
+    setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length);
+    setOpen(true);
+  };
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCurrentTipIndex(prevIndex =>
-        prevIndex === tips.length - 1 ? 0 : prevIndex + 1
-      );
+      setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length);
     }, 4000);
 
     return () => clearInterval(intervalId);
   }, []);
 
-  const handleClose = () => {
-    setShowTips(false);
-  };
-
-  const tipsContainerStyle = {
-    display: showTips ? 'flex' : 'none',
-    position: 'fixed',
-    top: '20px',
-    right: '20px',
-    flexDirection: 'column',
-    alignItems: 'flex-end',
-  };
-
-  const tipsBoxStyle = {
-    backgroundColor: '#fff',
-    padding: '20px',
-    borderRadius: '8px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-    maxWidth: '300px',
-    width: '100%',
-    marginBottom: '10px',
-  };
-
-  const closeButtonStyle = {
-    border: 'none',
-    background: 'transparent',
-    color: '#999',
-    fontSize: '18px',
-    cursor: 'pointer',
-    marginLeft: 'auto',
-  };
-
   return (
-    <div className="tips-container" style={tipsContainerStyle}>
-      {tips.length > 0 && (
-        <div className="tips-box" style={tipsBoxStyle}>
-          <span>{tips[currentTipIndex].tip}</span>
-          <button className="close-button" onClick={handleClose} style={closeButtonStyle}>✕</button>
-        </div>
-      )}
-    </div>
+    <Snackbar
+      open={open}
+      autoHideDuration={null} // null to keep open until user clicks close
+      onClose={handleClose}
+      onExited={handleExited}
+      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+    >
+      <SnackbarContent
+        message={
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center',  padding: '20px', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', maxWidth: '300px', width: '100%', margin: '20px' }}>
+            <span>{quotes[currentQuoteIndex]}</span>
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleClose}
+              style={{ marginLeft: 'auto', color: '#999' }}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </div>
+        }
+      />
+    </Snackbar>
   );
 };
 
