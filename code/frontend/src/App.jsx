@@ -1,16 +1,21 @@
+import Community from "./Community/Community";
+import "./App.css";
+import Banner from "./Banner/Banner";
+import Footer from "./Footer/AppFooter";
+import Home from "./Home/Home";
+import DoctorProfile from "./Profile/DoctorProfile";
 
-import TipsCards from './componetnts/TipsCards/TipsCards'
-
-import Notification from "./componetnts/Notifications/Notifications";
-
-const App = () => {
-
+function App() {
   return (
-    <div>
-      <TipsCards/>
-      <Notification/>
-    </div>
+    <>
+      <Home />
+      {/* <Banner /> */}
+
+      {/* <DoctorProfile /> */}
+      <Community />
+      <Footer />
+    </>
   );
-};
+}
 
 export default App;
