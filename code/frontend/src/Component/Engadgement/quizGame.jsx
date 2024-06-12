@@ -11,7 +11,7 @@ const quizQuestions = [
     id: 2,
     question: "Who wrote 'To Kill a Mockingbird'?",
     options: [
-      "Harper Lee",
+      "Harper Lee",      
       "Mark Twain",
       "J.K. Rowling",
       "F. Scott Fitzgerald",
