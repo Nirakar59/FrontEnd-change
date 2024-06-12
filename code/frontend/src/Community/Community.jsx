@@ -1,4 +1,3 @@
-
 import {
   Avatar,
   Box,
@@ -13,13 +12,26 @@ import {
   IconButton,
   InputAdornment,
 } from "@mui/material";
+
+import Accordion from "@mui/material/Accordion";
+// import AccordionActions from "@mui/material/AccordionActions";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+// import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
   Search as SearchIcon,
   Comment as CommentIcon,
   Share as ShareIcon,
 } from "@mui/icons-material";
+import { useState } from "react";
+// import AccordionUsage from "./readmore";
 
 function Community() {
+  const [expanded, setExpanded] = useState(false);
+
+  const handleExpand = () => {
+    setExpanded(!expanded);
+  };
   return (
     <Box p={4}>
       <Typography variant="h5" fontWeight="bold" mb={4}>
@@ -84,13 +96,25 @@ function Community() {
             Even if you put this Ukraine business aside, all the crazy things
             this administration has actually done fly in the face of so many
             things which were “normal” for decades. Nothing like a good shakeup,
-            but  disregard for almost every professional in so many
-            different disciplines of what used to be sane governance is beyond
-            belief.
+            but disregard for almost every professional in so many different
+            disciplines of what used to be sane governance is beyond belief.
           </Typography>
-          <Button href="#" color="primary">
-            Read more
+          <Button color="primary" onClick={handleExpand}>
+            {expanded ? "Close" : "Read more"}
           </Button>
+          <Accordion expanded={expanded}>
+            <AccordionSummary
+              aria-controls="panel1-content"
+              id="panel1-header"
+              onClick={handleExpand}
+            />
+
+            <AccordionDetails>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+              eget.
+            </AccordionDetails>
+          </Accordion>
           <Divider sx={{ my: 2 }} />
           <Box display="flex" alignItems="center">
             <IconButton color="inherit" sx={{ mr: 2 }}>
@@ -132,8 +156,8 @@ function Community() {
             This morning the House Intelligence Committee will hold their
             seventh round of public hearings in preparation for possible
             Impeachment proceedings against President Donald Trump. Testifying
-            today are Fiona Hill,  former Russia adviser and David
-            Holmes, an aide to top Ukraine diplomat Bill Taylor.
+            today are Fiona Hill, former Russia adviser and David Holmes, an
+            aide to top Ukraine diplomat Bill Taylor.
           </Typography>
           <Divider sx={{ my: 2 }} />
           <Box display="flex" alignItems="center">

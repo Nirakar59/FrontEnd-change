@@ -1,9 +1,13 @@
 import Community from "./Community/Community";
 import "./App.css";
+
 import Banner from "./Banner/Banner";
+
 import Footer from "./Footer/AppFooter";
 import Home from "./Home/Home";
 import DoctorProfile from "./Profile/DoctorProfile";
+
+// import ChatComponent from "./Component/chat";
 
 function App() {
   return (
@@ -11,7 +15,7 @@ function App() {
       <Home />
       <Banner />
 
-      <DoctorProfile />
+      {/* <DoctorProfile /> */}
       <Community />
       <Footer />
     </>

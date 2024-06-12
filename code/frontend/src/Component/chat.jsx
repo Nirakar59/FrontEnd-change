@@ -1,71 +1,63 @@
-import React, { useState, useEffect, useRef } from "react";
+// import React, { useState, useEffect, useRef } from "react";
 
-function ChatComponent() {
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState("");
-  const ws = useRef(null);
+// function ChatComponent() {
+//   const [messages, setMessages] = useState([]);
+//   const [input, setInput] = useState("");
+//   const ws = useRef(null);
 
-  useEffect(() => {
-    ws.current = new WebSocket("ws://localhost:8085");
+//   useEffect(() => {
+//     // Establish WebSocket connection
+//     ws.current = new WebSocket("ws://localhost:8000/ws/chat/");
 
-    ws.current.onopen = () => {
-      console.log("Connected to WebSocket server");
-    };
+//     // Event handler for incoming messages
+//     ws.current.onmessage = (event) => {
+//       const message = JSON.parse(event.data);
+//       setMessages((prevMessages) => [...prevMessages, message]);
+//     };
 
-    ws.current.onmessage = (message) => {
-      const newMessage = JSON.parse(message.data);
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
-    };
+//     // Cleanup function to close WebSocket connection
+//     return () => {
+//       ws.current.close();
+//     };
+//   }, []);
 
-    ws.current.onclose = () => {
-      console.log("WebSocket connection closed");
-    };
+//   const handleInputChange = (e) => {
+//     setInput(e.target.value);
+//   };
 
-    ws.current.onerror = (error) => {
-      console.error("WebSocket error: ", error);
-    };
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     if (input.trim() !== "") {
+//       // Send message to server
+//       ws.current.send(JSON.stringify({ message: input }));
+//       setInput("");
+//     }
+//   };
 
-    return () => {
-      ws.current.close();
-    };
-  }, []);
+//   return (
+//     <div>
+//       <div>
+//         {messages.map((message, index) => (
+//           <div key={index}>
+//             {message.sender === "user" ? (
+//               <p>You: {message.message}</p>
+//             ) : (
+//               <p>Server: {message.message}</p>
+//             )}
+//           </div>
+//         ))}
+//       </div>
+//       <form onSubmit={handleSubmit}>
+//         <input
+//           type="text"
+//           value={input}
+//           onChange={handleInputChange}
+//           placeholder="Type a message..."
+//         />
+//         <button type="submit">Send</button>
+//       </form>
+//     </div>
+//   );
+// }
 
-  const handleInputChange = (e) => {
-    setInput(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (input.trim() !== "") {
-      const newMessage = {
-        text: input,
-        sender: "user",
-      };
-      ws.current.send(JSON.stringify(newMessage));
-      setInput("");
-    }
-  };
-
-  return (
-    <div>
-      <div>
-        {messages.map((message, index) => (
-          <div key={index}>
-            <p>{message.text}</p>
-          </div>
-        ))}
-      </div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={input}
-          onChange={handleInputChange}
-          placeholder="Type a message..."
-        />
-        <button type="submit">Send</button>
-      </form>
-    </div>
-  );
-}
-
-export default ChatComponent;
+// export default ChatComponent;
