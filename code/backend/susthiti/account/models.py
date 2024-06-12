@@ -136,7 +136,6 @@ class MediatatorTeacherProfile(models.Model):
     user = models.ForeignKey(UserData, on_delete=models.CASCADE, related_name='mediatator_teacher_profiles')
     teacher_id = models.AutoField(primary_key=True, unique=True)
     
-    
     username = models.CharField(max_length=125, unique=True)
     email = models.EmailField(max_length=100)
     bio = models.TextField(blank=True)
@@ -151,3 +150,21 @@ class MediatatorTeacherProfile(models.Model):
         if not self.email:
             self.email = self.user.email
         super().save(*args, **kwargs)
+        
+class Appointment(models.Model):
+    user = models.ForeignKey(UserData, on_delete=models.CASCADE, related_name='appointments')
+    doctor_or_teacher = models.ForeignKey(UserData, on_delete=models.CASCADE, related_name='scheduled_appointments')
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+    details = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"Appointment with {self.doctor_or_teacher} at {self.start_time}"
+
+class FreeTimeSlot(models.Model):
+    doctor_or_teacher = models.ForeignKey(UserData, on_delete=models.CASCADE, related_name='free_time_slots')
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+
+    def __str__(self):
+        return f"Free time slot for {self.doctor_or_teacher} from {self.start_time} to {self.end_time}"

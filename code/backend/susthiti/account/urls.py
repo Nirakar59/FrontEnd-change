@@ -16,4 +16,7 @@ urlpatterns = [
     
     path('mediator-teachers/', MediatatorTeacherProfileListCreate.as_view(), name='mediator-teacher-list-create'),
     path('mediator-teachers/<int:pk>/', MediatatorTeacherProfileRetrieveUpdateDestroy.as_view(), name='mediator-teacher-detail'),
+
+    path('free-time-slots/', FreeTimeSlotListCreateAPIView.as_view(), name='free-time-slot-list-create'),
+    path('free-time-slots/<int:pk>/', FreeTimeSlotRetrieveUpdateDestroyAPIView.as_view(), name='free-time-slot-detail'),
 ]
