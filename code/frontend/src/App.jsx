@@ -1,18 +1,22 @@
-
-//
+import Community from "./Community/Community";
 import "./App.css";
+import Banner from "./Banner/Banner";
+import Footer from "./Footer/AppFooter";
+import Home from "./Home/Home";
+import DoctorProfile from "./Profile/DoctorProfile";
 
-import BreathingExercise from "./Component/Engadgement/engadgement";
-import Quiz from "./Component/Engadgement/quizGame";
 
 function App() {
   return (
     <>
-      <BreathingExercise />
-      <Quiz></Quiz>
+      <Home />
+      {/* <Banner /> */}
+
+      {/* <DoctorProfile /> */}
+      <Community />
+      <Footer />
     </>
   );
 }
-
 
 export default App;
