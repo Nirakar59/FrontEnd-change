@@ -8,16 +8,12 @@ urlpatterns = [
     path('auth/register/', RegisterView.as_view(), name="sign_up"),
     path('auth/usersList/', UserListView.as_view(), name="get_users"),
     
-    # # user account CRUD
-    # path('user/delete/<int:pk>/', UserDeleteAPIView.as_view(), name='user-delete'),  #delete the whole username account
-    # path('user/details/',SpecificUserDetails.as_view(), name='user specific details' ) ,  # user specific details
+    path('doctors/', DoctorProfileListCreate.as_view(), name='doctor-list-create'),
+    path('doctors/<int:pk>/', DoctorProfileRetrieveUpdateDestroy.as_view(), name='doctor-detail'),
     
-    # # password-reset
-    # path('password-reset-email/', EmailCheckAPIView.as_view(), name='send_email'),
-    # path('update-password/', PasswordUpdateAPIView.as_view(), name='password_update'),
-
-    # path('buyer-profile/<int:pk>/', BuyerProfileDetailAPIView.as_view(), name='buyer_profile_detail'),
-    # path('seller-profile/<int:pk>/', SellerProfileDetailAPIView.as_view(), name='buyer_profile_detail'),
-    # path('user/profile/', CombinedProfileAPIView.as_view(), name='combined-profile'),
-
+    path('anonymous-users/', AnnonymousUserListCreate.as_view(), name='anonymous-user-list-create'),
+    path('anonymous-users/<int:pk>/', AnnonymousUserRetrieveUpdateDestroy.as_view(), name='anonymous-user-detail'),
+    
+    path('mediator-teachers/', MediatatorTeacherProfileListCreate.as_view(), name='mediator-teacher-list-create'),
+    path('mediator-teachers/<int:pk>/', MediatatorTeacherProfileRetrieveUpdateDestroy.as_view(), name='mediator-teacher-detail'),
 ]

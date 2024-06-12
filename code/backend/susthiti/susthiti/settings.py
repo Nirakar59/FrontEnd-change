@@ -186,6 +186,3 @@ CHANNEL_LAYERS = {
 # Set ASGI application
 ASGI_APPLICATION = 'susthiti.asgi.application'
 
-
-# chat application 
-ASGI_APPLICATION = 'susthiti.asgi.application'

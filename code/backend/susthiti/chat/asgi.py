@@ -1,16 +1,16 @@
-# chat_project/asgi.py
-import os
-import django
-from channels.routing import ProtocolTypeRouter, URLRouter
-from django.core.asgi import get_asgi_application
-import chat.routing
+# # chat_project/asgi.py
+# import os
+# import django
+# from channels.routing import ProtocolTypeRouter, URLRouter
+# from django.core.asgi import get_asgi_application
+# import chat.routing
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'chat_project.settings')
-django.setup()
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'chat_project.settings')
+# django.setup()
 
-application = ProtocolTypeRouter({
-    "http": get_asgi_application(),
-    "websocket": URLRouter(
-        chat.routing.websocket_urlpatterns
-    ),
-})
+# application = ProtocolTypeRouter({
+#     "http": get_asgi_application(),
+#     "websocket": URLRouter(
+#         chat.routing.websocket_urlpatterns
+#     ),
+# })
