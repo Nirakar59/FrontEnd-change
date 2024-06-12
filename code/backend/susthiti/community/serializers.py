@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Post
+from .models import *
 from django.utils.text import slugify
 
 class PostSerializer(serializers.ModelSerializer):
@@ -11,3 +11,9 @@ class PostSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data['slug'] = slugify(validated_data['title'])
         return super().create(validated_data)
+    
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ['id', 'user', 'text', 'created_at']
