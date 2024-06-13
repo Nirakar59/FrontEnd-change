@@ -40,22 +40,21 @@ const TipsCards = () => {
       autoHideDuration={null} // null to keep open until user clicks close
       onClose={handleClose}
       onExited={handleExited}
-      anchorOrigin={{ vertical: "top", horizontal: "center" }}
-
+      anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      style={{ position: "fixed", bottom: "24px", right: "24px" }}
     >
       <SnackbarContent
+        style={{ backgroundColor: "#fff", color: "#333", maxWidth: "400px" }}
         message={
-          <div >
-            <span>{quotes[currentQuoteIndex]}</span>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <span style={{ marginRight: "auto" }}>{quotes[currentQuoteIndex]}</span>
             <IconButton
               size="small"
               aria-label="close"
               color="inherit"
               onClick={handleClose}
-              style={{ marginLeft: "auto", color: "#999"
-              }}
+              style={{ marginLeft: "16px", color: "#999" }}
             >
-              &nbsp;
               <CloseIcon fontSize="small" />
             </IconButton>
           </div>

@@ -189,98 +189,71 @@ const Header = () => {
   return (
     <>
       <AppBar position="sticky" sx={{ bgcolor: "#FFFFFF", color: "#000" }}>
-        <Container>
-          <Grid
-            container
-            style={{ display: "flex", alignItems: "center", padding: "3px 0" }}
-          >
-            <Grid item xs={3} md={3}>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                <Link
-                  to="/feed"
-                  style={{ textDecoration: "none", color: "inherit" }}
-                >
-                  Logo
-                  {/* <img
+        <Grid container>
+          <Grid item xs={6} md={6}>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <Link
+                to="/feed"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                Logo
+                {/* <img
                     src={HeadLogo}
                     alt=""
                     style={{ width: "50px", borderRadius: "15%" }}
                   /> */}
-                </Link>
-              </Typography>
-            </Grid>
+              </Link>
+            </Typography>
+          </Grid>
 
-            <Grid item xs={6} md={4}>
-              <div className={classes.searchContainer}>
-                <TextField
-                  className={classes.searchInput}
-                  placeholder="Search..."
-                  variant="outlined"
-                  value={searchText}
-                  onChange={handleSearchChange}
-                  id="masterSearchInput"
-                />
-                &nbsp;
-                {searchText && (
-                  <IconButton
-                    className={classes.closeIcon}
-                    onClick={closeSearch}
-                  >
-                    <CloseIcon color="secondary" />
-                  </IconButton>
-                )}
-              </div>
-            </Grid>
-
-            <Grid item xs={3} md={5}>
-              <div
-                style={{
-                  float: "right",
-                  display: "flex",
-                  alignItems: "center",
+          <Grid item xs={6} md={6}>
+            <div
+              style={{
+                float: "right",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Notification />
+              {/* <Notifications /> */}
+              &nbsp;
+              {!isMobile && (
+                <IconButton onClick={handleMenuClick}>
+                  <AccountCircleIcon className={classes.largeIcon} />
+                </IconButton>
+              )}
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+                keepMounted
+                sx={{ width: "250px" }}
+                MenuListProps={{
+                  sx: {
+                    width: "250px",
+                  },
                 }}
               >
-                <Notification />
-                {/* <Notifications /> */}
-                &nbsp;
-                {!isMobile && (
-                  <IconButton onClick={handleMenuClick}>
-                    <AccountCircleIcon className={classes.largeIcon} />
-                  </IconButton>
-                )}
-                <Menu
-                  anchorEl={anchorEl}
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
-                  keepMounted
-                  sx={{ width: "250px" }}
-                  MenuListProps={{
-                    sx: {
-                      width: "250px",
-                    },
-                  }}
+                <Link
+                  to={profileLink}
+                  style={{ textDecoration: "none", color: "inherit" }}
                 >
-                  <Link
-                    to={profileLink}
-                    style={{ textDecoration: "none", color: "inherit" }}
-                  >
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  </Link>
-                </Menu>
-                {isMobile && (
-                  <IconButton
-                    color="inherit"
-                    aria-label="open drawer"
-                    edge="start"
-                    onClick={toggleDrawer}
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                )}
-              </div>
-            </Grid>
+                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                </Link>
+              </Menu>
+              {isMobile && (
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  edge="start"
+                  onClick={toggleDrawer}
+                >
+                  <MenuIcon />
+                </IconButton>
+              )}
+            </div>
           </Grid>
-        </Container>
+        </Grid>
       </AppBar>
       <Container>
         <Grid container>
@@ -288,48 +261,7 @@ const Header = () => {
             item
             xs={10}
             style={{ zIndex: 999, width: "100%", position: "fixed" }}
-          >
-            {Object.keys(searchResults).map((category) => (
-              <div key={category}>
-                <div
-                  className={classes.searchResultContainer}
-                  style={{
-                    background: "#efefef",
-
-                    boxShadow: "1px 5px 0px -4px rgba(38,38,38,0.56)",
-                  }}
-                >
-                  {searchResults[category].length > 0 ? (
-                    searchResults[category].map((product) => (
-                      <div
-                        className={classes.searchResultItem}
-                        key={product.id}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                        onClick={() => handleCardClick(product)}
-                      >
-                        <img
-                          width="30"
-                          src={product.image}
-                          alt={product.product_name}
-                        />
-                        &nbsp;&nbsp;
-                        <Typography variant="body1" gutterBottom>
-                          {product.product_name}
-                        </Typography>
-                      </div>
-                    ))
-                  ) : (
-                    <Typography variant="body1" gutterBottom>
-                      No items found
-                    </Typography>
-                  )}
-                </div>
-              </div>
-            ))}
-          </Grid>
+          ></Grid>
         </Grid>
       </Container>
 

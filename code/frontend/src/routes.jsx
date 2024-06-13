@@ -10,6 +10,7 @@ import Community from "./components/community/Community";
 import PaymentPage from "./components/payment/e-khalti";
 import DoctorProfile from "./components/Profile/DoctorProfile";
 import Feed from "./components/home/feed";
+import AptitudeTest from "./components/aptitudeTest/appitudeComp";
 
 export default function MainRouter() {
   return (
@@ -24,6 +25,9 @@ export default function MainRouter() {
       <Route path="/profile/doctor" element={<DoctorProfile />} />
       <Route path="/profile/mediator-teacher/" element={<DoctorProfile />} />
       <Route path="/profile/user" element={<DoctorProfile />} />
+      <Route path="/feed" element={<Feed />} />
+
+      <Route path="/aptitude-test/" element={<AptitudeTest />} />
       <Route path="/feed" element={<Feed />} />
 
     </Routes>

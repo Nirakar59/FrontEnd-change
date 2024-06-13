@@ -6,8 +6,32 @@ import AppFooter from "../footer/footer";
 import Notification from "../Notifications/Notifications";
 import HeaderPublic from "../header/header_public";
 import { useNavigate } from "react-router-dom";
-
+import LandingPage from "../LandingPage/LadingPage"
 import React, { useState, useEffect } from "react";
+import EmergencySupport from "../Emergency/Emergency";
+import PieChartComponent from "../charts/pieChart";
+import GeolocationComponent from "../charts/geoLocation";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Container,
+  IconButton,
+  Drawer,
+  List,
+  Grid,
+  Card,
+  CardContent,
+  CardActionArea,
+  CardMedia,
+  ListItem,
+  ListItemText,
+  TextField,
+  Menu,
+  MenuItem,
+  useMediaQuery,
+  createTheme, // Import createTheme
+} from "@mui/material";
 
 function Home() {
   const navigate = useNavigate();
@@ -23,6 +47,22 @@ function Home() {
       <HeaderPublic />
       <Banner />
 
+      <Grid container>
+
+        <Grid item={6}>
+          <img src="https://unsplash/it/555" alt="" />
+
+        </Grid>
+
+        <Grid item={16}>
+
+        </Grid>
+
+      </Grid>
+      
+      <GeolocationComponent/>
+      <LandingPage/>
+    
       <TipsCards />
 
       <AppFooter />

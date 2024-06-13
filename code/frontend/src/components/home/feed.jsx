@@ -7,6 +7,33 @@ import Notification from "../Notifications/Notifications";
 import Home from "./home";
 import React, { useState, useEffect } from "react";
 import Header from "../header/header";
+import EmergencySupport from "../Emergency/Emergency";
+import LandingPage from "../LandingPage/LadingPage";
+import GeolocationComponent from "../charts/geoLocation";
+import PieChartComponent from "../charts/pieChart";
+
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Container,
+  IconButton,
+  Drawer,
+  List,
+  Grid,
+  Card,
+  CardContent,
+  CardActionArea,
+  CardMedia,
+  ListItem,
+  ListItemText,
+  TextField,
+  Menu,
+  MenuItem,
+  useMediaQuery,
+  createTheme, // Import createTheme
+} from "@mui/material";
+
 
 function Feed() {
   // Function to fetch user data and store user ID in localStorage
@@ -55,6 +82,37 @@ function Feed() {
       <Header />
 
       <Banner />
+
+ 
+      <Grid container spacing={2}>
+      {/* Grid item for the image */}
+      <Grid item xs={6}>
+        <img
+          src="https://unsplash.it/555/"
+          alt="Placeholder image"
+          style={{ maxWidth: "100%", height: "auto" }}
+        />
+      </Grid>
+
+      {/* Grid item for other content */}
+      <Grid item xs={6}>
+        {/* Place your content here */}
+      </Grid>
+      </Grid>
+  
+
+   
+  
+
+
+
+      <LandingPage/>
+
+      
+
+      <GeolocationComponent/>
+
+      {/* <PieChartComponent/> */}
 
       <TipsCards />
 

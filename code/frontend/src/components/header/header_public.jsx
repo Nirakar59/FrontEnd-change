@@ -250,47 +250,8 @@ const HeaderPublic = () => {
               xs={10}
               style={{ zIndex: 999, width: "100%", position: "fixed" }}
             >
-              {Object.keys(searchResults).map((category) => (
-                <div key={category}>
-                  <div
-                    className={classes.searchResultContainer}
-                    style={{
-                      background: "#efefef",
-
-                      boxShadow:
-                        "1px 5px 0px -4px rgba(38,38,38,0.56)",
-                    }}
-                  >
-                    {searchResults[category].length > 0 ? (
-                      searchResults[category].map((product) => (
-                        <div
-                          className={classes.searchResultItem}
-                          key={product.id}
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                          }}
-                          onClick={() => handleCardClick(product)}
-                        >
-                          <img
-                            width="30"
-                            src={product.image}
-                            alt={product.product_name}
-                          />
-                          &nbsp;&nbsp;
-                          <Typography variant="body1" gutterBottom>
-                            {product.product_name}
-                          </Typography>
-                        </div>
-                      ))
-                    ) : (
-                      <Typography variant="body1" gutterBottom>
-                        No items found
-                      </Typography>
-                    )}
-                  </div>
-                </div>
-              ))}
+              
+          
             </Grid>
           </Grid>
         </Container>

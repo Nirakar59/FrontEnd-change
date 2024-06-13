@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  makeStyles,
-  Modal,
   Box,
   Container,
   Card,
@@ -9,42 +7,10 @@ import {
   Button,
   TextField,
   CircularProgress,
+  Modal,
 } from "@mui/material";
 
-const useStyles = makeStyles((theme) => ({
-  card: {
-    padding: theme.spacing(4),
-    maxWidth: 600,
-    margin: "auto",
-    marginTop: theme.spacing(4),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    textAlign: "center",
-  },
-  inputField: {
-    marginBottom: theme.spacing(2),
-    width: "100%",
-  },
-  buttonGroup: {
-    marginTop: theme.spacing(2),
-  },
-  modalBox: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[24],
-    padding: theme.spacing(4),
-    outline: "none",
-  },
-}));
-
 const DoctorProfileUpdate = () => {
-  const classes = useStyles();
-
   const [profileData, setProfileData] = useState({});
   const [userId, setUserId] = useState("");
   const [profileEditMode, setProfileEditMode] = useState(false);
@@ -93,7 +59,7 @@ const DoctorProfileUpdate = () => {
   const fetchProfileData = async () => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/account/buyer-profile/${userId}/`,
+        `http://localhost:8000/sushtiti/account/doctors/${userId}/`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -200,132 +166,210 @@ const DoctorProfileUpdate = () => {
 
   return (
     <Container>
-      <Card className={classes.card}>
-        <img
-          key={profileData.image} // Add key prop here
-          src={
-            imageFile
-              ? URL.createObjectURL(imageFile)
-              : `http://127.0.0.1:8000${profileData.image}`
-          }
-          alt="Profile Image"
-          style={{ maxWidth: "100%", width: "300px", borderRadius: "50%" }}
-        />
-
-        {profileEditMode && (
-          <TextField
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            className={classes.inputField}
-          />
-        )}
-
-        <Typography variant="h6" gutterBottom>
-          Username: {buyerName}
-        </Typography>
-        <Typography variant="h6" gutterBottom>
-          Email: {buyerEmail}
-        </Typography>
-        <Typography variant="h6" gutterBottom>
-          ID: #{profileData.buyer_id}
-        </Typography>
-
-        <Typography variant="h6" gutterBottom>
-          Address:{" "}
-          {profileEditMode ? (
-            <TextField
-              name="address"
-              value={profileData.address}
-              onChange={handleInputChange}
-              className={classes.inputField}
-            />
-          ) : (
-            profileData.address
-          )}
-        </Typography>
-
-        <Typography variant="h6" gutterBottom>
-          Phone Number:{" "}
-          {profileEditMode ? (
-            <TextField
-              name="phone_number"
-              value={profileData.phone_number}
-              onChange={handleInputChange}
-              className={classes.inputField}
-            />
-          ) : (
-            profileData.phone_number
-          )}
-        </Typography>
-
-        <Typography variant="h6" gutterBottom>
-          Bio:{" "}
-          {profileEditMode ? (
-            <TextField
-              name="bio"
-              value={profileData.bio}
-              onChange={handleInputChange}
-              className={classes.inputField}
-            />
-          ) : (
-            profileData.bio
-          )}
-        </Typography>
-
-        <div className={classes.buttonGroup}>
-          {profileEditMode ? (
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleSaveButtonClick}
-              disabled={loading}
-              className={classes.inputField}
-            >
-              {loading ? <CircularProgress size={24} /> : "Save"}
-            </Button>
-          ) : (
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleEditButtonClick}
-              className={classes.inputField}
-            >
-              Edit
-            </Button>
-          )}
-          <Button
-            variant="contained"
-            onClick={handleLogout}
-            className={classes.inputField}
+      <Card
+        style={{
+          padding: "24px",
+          maxWidth: "600px",
+          margin: "24px auto",
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+          borderRadius: "8px",
+        }}
+      >
+        <Box display="flex" flexDirection="column">
+          <Box
+            display="flex"
+            style={{
+              width: "200px",
+              height: "200px",
+              borderRadius: "50%",
+              overflow: "hidden",
+              position: "relative",
+              marginBottom: "16px",
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+            }}
           >
-            Logout
-          </Button>
-        </div>
-
-        <Modal open={open} onClose={handleClose}>
-          <Box className={classes.modalBox}>
-            <Typography variant="h6" gutterBottom>
-              Are you sure you want to logout?
-            </Typography>
-            <Box sx={{ display: "flex", justifyContent: "flex-start", mt: 4 }}>
-              <Button variant="contained" onClick={handleClose}>
-                Cancel
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleLogoutConfirm}
-                style={{ marginLeft: "10px" }}
-              >
-                Logout
-              </Button>
-            </Box>
+            <img
+              key={profileData.image}
+              src={
+                imageFile
+                  ? URL.createObjectURL(imageFile)
+                  : `${profileData.image}`
+              }
+              alt="Profile"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+            {profileEditMode && (
+              <TextField
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                style={{
+                  position: "absolute",
+                  bottom: "8px",
+                  right: "8px",
+                  zIndex: 1,
+                  opacity: 0,
+                  cursor: "pointer",
+                }}
+              />
+            )}
           </Box>
-        </Modal>
+
+          <Typography variant="h5" style={{ marginBottom: "8px" }}>
+            {buyerName}
+          </Typography>
+          <Typography variant="subtitle1" style={{ marginBottom: "8px" }}>
+            {buyerEmail}
+          </Typography>
+          <Typography variant="body1" style={{ marginBottom: "16px" }}>
+            ID: #{profileData.doctor_id}
+          </Typography>
+
+          <Typography variant="body1" style={{ marginBottom: "16px" }}>
+            Address:{" "}
+            {profileEditMode ? (
+              <TextField
+                name="address"
+                value={profileData.address}
+                onChange={handleInputChange}
+                style={{ width: "100%" }}
+              />
+            ) : (
+              profileData.address
+            )}
+          </Typography>
+
+          <Typography variant="body1" style={{ marginBottom: "16px" }}>
+            Phone Number:{" "}
+            {profileEditMode ? (
+              <TextField
+                name="phone_number"
+                value={profileData.phone_number}
+                onChange={handleInputChange}
+                style={{ width: "100%" }}
+              />
+            ) : (
+              profileData.phone_number
+            )}
+          </Typography>
+
+          <Typography
+            variant="body1"
+            style={{ marginBottom: "16px", textAlign: "left" }}
+          >
+            Bio:{" "}
+            {profileEditMode ? (
+              <TextField
+                name="bio"
+                value={profileData.bio}
+                onChange={handleInputChange}
+                style={{ width: "100%" }}
+              />
+            ) : (
+              profileData.bio
+            )}
+          </Typography>
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "16px",
+              width: "100%",
+            }}
+          >
+            {profileEditMode ? (
+              <>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSaveButtonClick}
+                  disabled={loading}
+                  style={{ marginRight: "8px" }}
+                >
+                  {loading ? <CircularProgress size={24} /> : "Save"}
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={handleCancelEdit}
+                  style={{ marginLeft: "8px" }}
+                >
+                  Cancel
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleEditButtonClick}
+                  style={{ marginRight: "8px" }}
+                >
+                  Edit
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={handleLogout}
+                  style={{ marginLeft: "8px" }}
+                >
+                  Logout
+                </Button>
+              </>
+            )}
+          </div>
+        </Box>
       </Card>
+
+      <Modal open={open} onClose={handleClose}>
+        <Box
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "300px",
+            backgroundColor: "#ffffff",
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0)",
+            padding: "24px",
+            outline: "none",
+            borderRadius: "8px",
+            textAlign: "center",
+          }}
+        >
+          <Typography variant="h6" gutterBottom>
+            Are you sure you want to logout?
+          </Typography>
+          <Box
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "24px",
+            }}
+          >
+            <Button
+              variant="contained"
+              onClick={handleClose}
+              style={{ marginRight: "16px" }}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleLogoutConfirm}
+            >
+              Logout
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
     </Container>
   );
 };
 
 export default DoctorProfileUpdate;
+

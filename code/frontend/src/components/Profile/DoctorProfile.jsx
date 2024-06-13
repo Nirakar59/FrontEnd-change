@@ -1,38 +1,46 @@
+import Appointment from "../Appointment/Appointment";
+import DoctorProfileUpdate from "./updateDoctor";
 import {
-  Avatar,
-  Button,
+  AppBar,
+  Toolbar,
+  Typography,
+  Container,
+  IconButton,
+  Drawer,
+  List,
+  Grid,
   Card,
   CardContent,
-  CardHeader,
-  Tab,
-  Tabs,
-  Typography,
-  Box,
-  Grid,
-  IconButton,
-  Stack,
-  Paper,
+  CardActionArea,
+  CardMedia,
+  ListItem,
+  ListItemText,
+  TextField,
+  Menu,
+  MenuItem,
+  useMediaQuery,
+  createTheme, // Import createTheme
 } from "@mui/material";
-import MessageIcon from "@mui/icons-material/Message";
-
-import StarIcon from "@mui/icons-material/Star";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import DoctorProfileUpdate from "./updateDoctor";
-
-
-
-
-function DoctorProfile() {
-  return (
-
+export default function DoctorProfile(){
+  return(
     <>
-              <DoctorProfileUpdate/>
+
+    <Grid container>
+      <Grid item md={5}>
+      <DoctorProfileUpdate/>
+
+
+
+      </Grid>
+
+      <Grid  item md={5}>
+      <Appointment/>
+      </Grid>
+
+
+
+    </Grid>
+
     </>
-   
-
-
-     
-  );
+  )
 }
-
-export default DoctorProfile;
