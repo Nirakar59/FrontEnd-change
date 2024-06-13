@@ -4,12 +4,11 @@ import Banner from "../Banner/Banner";
 import TipsCards from "../TipsCards/TipsCards";
 import AppFooter from "../footer/footer";
 import Notification from "../Notifications/Notifications";
-import HeaderPublic from "../header/header_public";
 
-function Home() {
+function Feed() {
   return (
     <>
-      <HeaderPublic />
+      <HeaderNav />
       <Banner />
 
       <TipsCards />
@@ -19,4 +18,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Feed;

@@ -13,13 +13,13 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import HeaderPublic from "../header/headerPublic";
-import AppFooter from "../footer/footer";
+import HeaderPublic from "../header/header_public"; // Corrected import path
+import AppFooter from "../footer/footer"; // Corrected import path
 
 function Login() {
-  const navigate = useNavigate(); // Access the navigate function
+  const navigate = useNavigate();
   const [error, setError] = useState(null);
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -28,8 +28,7 @@ function Login() {
 
     try {
       const response = await fetch(
-
-        "http://127.0.0.1:8000/account/auth/login/",
+        "http://127.0.0.1:8000/sushtiti/account/auth/login/",
         {
           method: "POST",
           headers: {
@@ -40,12 +39,10 @@ function Login() {
       );
 
       if (response.ok) {
-        // Redirect to /feed upon successful login
         const data = await response.json();
         localStorage.setItem("accessToken", data.access);
         navigate("/feed");
       } else {
-        // Handle error response
         const errorData = await response.json();
         setError(errorData.message || "⚠️ Login failed‼️ ");
       }
@@ -81,7 +78,6 @@ function Login() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-
           <Box
             component="form"
             onSubmit={handleSubmit}
@@ -112,13 +108,11 @@ function Login() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-
             {error && (
-              <Typography variant="h5" color="error" sx={{ mt: 1 }}>
+              <Typography variant="body2" color="error" sx={{ mt: 1 }}>
                 {error}
               </Typography>
             )}
-
             <Button
               type="submit"
               fullWidth
