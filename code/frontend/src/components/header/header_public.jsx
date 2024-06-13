@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 import { Close as CloseIcon } from "@material-ui/icons";
+import logo from '../../Assets/Logo.png'; // Import the logo image
 
 import {
   AppBar,
@@ -131,7 +132,7 @@ const HeaderPublic = () => {
   );
 
   return (
-    <ThemeProvider theme={theme}> {/* Wrap your component with ThemeProvider */}
+    <ThemeProvider theme={theme}>
       <>
         <AppBar position="sticky" sx={{ bgcolor: "#FFFFFF", color: "#000" }}>
           <Container>
@@ -144,15 +145,16 @@ const HeaderPublic = () => {
               }}
             >
               <Grid item xs={3} md={3}>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                  <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-                    Logo
-                  </Link>
-                </Typography>
+                {/* <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}> */}
+                  {/* <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+                    <img src={logo} alt="logo" style={{ width: "105px" }} />
+                  </Link> */}
+                   <img src={logo} alt="logo" style={{ width: "105px" }} />
+                {/* </Typography> */}
               </Grid>
 
               <Grid item xs={6} md={4}>
-                {!isAuthPage && (
+                {/* {!isAuthPage && (
                   <div className={classes.searchContainer}>
                     <TextField
                       className={classes.searchInput}
@@ -172,7 +174,7 @@ const HeaderPublic = () => {
                       </IconButton>
                     )}
                   </div>
-                )}
+                )} */}
               </Grid>
 
               <Grid item xs={3} md={5}>

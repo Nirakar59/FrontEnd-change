@@ -5,28 +5,33 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-} from "@mui/material";
+  } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Emergency from "../Emergency/Emergency";
 import Projects from "../Project/Projects";
 
 export default function Widget() {
+  const themeColor = "#4fc3f7";
+  const themeFont = "'Spicy Rice', serif";
+  const faqFont = "'Roboto', sans-serif";
+
   return (
     <>
+      {/* <Emergency /> */}
       <Projects />
-      <Box bgcolor="teal" color="white" p={4}>
-        <Typography variant="h3" align="center" mb={4} fontWeight="bold">
-          Common questions
+      <Box bgcolor={themeColor} color="white" p={4} sx={{ fontFamily: faqFont }}>
+        <Typography variant="h3" align="center" mb={4} fontWeight="bold" sx={{ color: 'white', fontFamily: themeFont }}>
+          Common Questions
         </Typography>
-        <Typography variant="body1" align="center" mb={8}>
+        <Typography variant="body1" align="center" mb={8} sx={{ fontFamily: faqFont }}>
           Curiosity is an important part of taking care of ourselves and those
           we care about. Asking questions and staying informed helps protect and
           improve our emotional health.
         </Typography>
         <Box>
-          <Accordion>
+          <Accordion sx={{ backgroundColor: '#fff', color: 'black', border: `1px solid ${themeColor}`, mb: 2 }}>
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
+              expandIcon={<ExpandMoreIcon sx={{ color: themeColor }} />}
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
@@ -44,9 +49,9 @@ export default function Widget() {
             </AccordionDetails>
           </Accordion>
 
-          <Accordion>
+          <Accordion sx={{ backgroundColor: '#fff', color: 'black', border: `1px solid ${themeColor}`, mb: 2 }}>
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
+              expandIcon={<ExpandMoreIcon sx={{ color: themeColor }} />}
               aria-controls="panel2a-content"
               id="panel2a-header"
             >
@@ -66,9 +71,9 @@ export default function Widget() {
             </AccordionDetails>
           </Accordion>
 
-          <Accordion>
+          <Accordion sx={{ backgroundColor: '#fff', color: 'black', border: `1px solid ${themeColor}`, mb: 2 }}>
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
+              expandIcon={<ExpandMoreIcon sx={{ color: themeColor }} />}
               aria-controls="panel3a-content"
               id="panel3a-header"
             >
@@ -86,9 +91,9 @@ export default function Widget() {
             </AccordionDetails>
           </Accordion>
 
-          <Accordion>
+          <Accordion sx={{ backgroundColor: '#fff', color: 'black', border: `1px solid ${themeColor}`, mb: 2 }}>
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
+              expandIcon={<ExpandMoreIcon sx={{ color: themeColor }} />}
               aria-controls="panel4a-content"
               id="panel4a-header"
             >
@@ -107,9 +112,9 @@ export default function Widget() {
             </AccordionDetails>
           </Accordion>
 
-          <Accordion>
+          <Accordion sx={{ backgroundColor: '#fff', color: 'black', border: `1px solid ${themeColor}`, mb: 2 }}>
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
+              expandIcon={<ExpandMoreIcon sx={{ color: themeColor }} />}
               aria-controls="panel5a-content"
               id="panel5a-header"
             >
@@ -127,9 +132,9 @@ export default function Widget() {
             </AccordionDetails>
           </Accordion>
 
-          <Accordion>
+          <Accordion sx={{ backgroundColor: '#fff', color: 'black', border: `1px solid ${themeColor}`, mb: 2 }}>
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
+              expandIcon={<ExpandMoreIcon sx={{ color: themeColor }} />}
               aria-controls="panel6a-content"
               id="panel6a-header"
             >
@@ -148,7 +153,6 @@ export default function Widget() {
           </Accordion>
         </Box>
       </Box>
-      <Emergency />
     </>
   );
 }

@@ -1,16 +1,5 @@
-// import AppFooter from '../Footer/AppFooter'
-import HeaderNav from "../header/header";
-import Banner from "../Banner/Banner";
-import TipsCards from "../TipsCards/TipsCards";
-import AppFooter from "../footer/footer";
-import Notification from "../Notifications/Notifications";
-import HeaderPublic from "../header/header_public";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import LandingPage from "../LandingPage/LadingPage"
-import React, { useState, useEffect } from "react";
-import EmergencySupport from "../Emergency/Emergency";
-import PieChartComponent from "../charts/pieChart";
-import GeolocationComponent from "../charts/geoLocation";
 import {
   AppBar,
   Toolbar,
@@ -32,6 +21,16 @@ import {
   useMediaQuery,
   createTheme, // Import createTheme
 } from "@mui/material";
+import HeaderPublic from "../header/header_public";
+import Banner from "../Banner/Banner";
+import GeolocationComponent from "../charts/geoLocation";
+import LandingPage from "../LandingPage/LadingPage";
+import TipsCards from "../TipsCards/TipsCards";
+import StudentWellnessTips from "../StudentsWellBeing/StudentsWellBeing"; // Import StudentWellnessTips
+import AppFooter from "../footer/footer";
+import Widget from "../Widget/Widget";
+import Emergency from "../Emergency/Emergency";
+
 
 function Home() {
   const navigate = useNavigate();
@@ -46,25 +45,12 @@ function Home() {
     <>
       <HeaderPublic />
       <Banner />
-
-      <Grid container>
-
-        <Grid item={6}>
-          <img src="https://unsplash/it/555" alt="" />
-
-        </Grid>
-
-        <Grid item={16}>
-
-        </Grid>
-
-      </Grid>
-      
-      <GeolocationComponent/>
-      <LandingPage/>
-    
+      <Widget/>
+      <GeolocationComponent />
+      <LandingPage />
+      <StudentWellnessTips /> {/* Integrate StudentWellnessTips component */}
+      <Emergency/>
       <TipsCards />
-
       <AppFooter />
     </>
   );
