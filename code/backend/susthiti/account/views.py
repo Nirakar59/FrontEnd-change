@@ -11,7 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import UserSerializer
 from .models import UserData
 from .permissions import *
-
+from rest_framework.generics import RetrieveAPIView
 
 class RegisterView(APIView):
     def post(self, request):
@@ -32,6 +32,35 @@ class UserListView(ListAPIView):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
 
+class UserView(RetrieveAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        # Retrieve the authenticated user object
+        return self.request.user
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        user = self.get_object()
+
+        if user.is_doctor:
+            doctor_profile = DoctorProfile.objects.filter(user=user).first()
+            if doctor_profile:
+                context['doctor_profile'] = doctor_profile
+
+        elif user.is_annoymousUser:
+            annonymous_user = AnnonymousUser.objects.filter(user=user).first()
+            if annonymous_user:
+                context['annonymous_user'] = annonymous_user
+
+        elif user.is_mediatationTeacher:
+            mediatator_teacher_profile = MediatatorTeacherProfile.objects.filter(user=user).first()
+            if mediatator_teacher_profile:
+                context['mediatator_teacher_profile'] = mediatator_teacher_profile
+
+        return context
+
 class DoctorProfileListCreate(generics.ListCreateAPIView):
     queryset = DoctorProfile.objects.all()
     serializer_class = DoctorProfileSerializer
@@ -51,7 +80,7 @@ class MediatatorTeacherProfileListCreate(generics.ListCreateAPIView):
 class DoctorProfileRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = DoctorProfile.objects.all()
     serializer_class = DoctorProfileSerializer
-    permission_classes = [IsOwnerOrAdmin, IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     
 class AnnonymousUserRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = AnnonymousUser.objects.all()
@@ -101,3 +130,5 @@ class FreeTimeSlotRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPI
     def get_queryset(self):
         # Filter free time slots for the currently authenticated doctor or teacher
         return self.queryset.filter(doctor_or_teacher=self.request.user)
+    
+    

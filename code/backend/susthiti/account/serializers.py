@@ -7,7 +7,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserData
-        fields = ['username', 'email', 'password', 'is_annoymousUser', 'is_doctor', 'is_mediatationTeacher']
+        fields = ['id', 'username', 'email', 'password', 'is_annoymousUser', 'is_doctor', 'is_mediatationTeacher']
         extra_kwargs = {'password': {'write_only': True, 'required': True}}
 
     def create(self, validated_data):
@@ -57,4 +57,4 @@ from .models import FreeTimeSlot
 class FreeTimeSlotSerializer(serializers.ModelSerializer):
     class Meta:
         model = FreeTimeSlot
-        fields = ['id', 'start_time', 'end_time']
+        fields = "__all__"

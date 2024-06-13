@@ -7,6 +7,7 @@ urlpatterns = [
     path('auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('auth/register/', RegisterView.as_view(), name="sign_up"),
     path('auth/usersList/', UserListView.as_view(), name="get_users"),
+    path('auth/user/', UserView.as_view(), name="user"),
     
     path('doctors/', DoctorProfileListCreate.as_view(), name='doctor-list-create'),
     path('doctors/<int:pk>/', DoctorProfileRetrieveUpdateDestroy.as_view(), name='doctor-detail'),
@@ -20,5 +21,6 @@ urlpatterns = [
     path('free-time-slots/', FreeTimeSlotListCreateAPIView.as_view(), name='free-time-slot-list-create'),
     path('free-time-slots/<int:pk>/', FreeTimeSlotRetrieveUpdateDestroyAPIView.as_view(), name='free-time-slot-detail'),
     
+
     #########
 ]
