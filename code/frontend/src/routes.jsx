@@ -21,7 +21,9 @@ export default function MainRouter() {
       <Route path="/login" element={<Login />} />
       <Route path="/community" element={<Community />} />
       <Route path="/payment" element={<PaymentPage />} />
-      <Route path="/profile" element={<DoctorProfile />} />
+      <Route path="/profile/doctor" element={<DoctorProfile />} />
+      <Route path="/profile/mediator-teacher/" element={<DoctorProfile />} />
+      <Route path="/profile/user" element={<DoctorProfile />} />
       <Route path="/feed" element={<Feed />} />
 
     </Routes>

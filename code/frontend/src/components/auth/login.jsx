@@ -41,6 +41,7 @@ function Login() {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("accessToken", data.access);
+
         navigate("/feed");
       } else {
         const errorData = await response.json();
@@ -58,6 +59,7 @@ function Login() {
       navigate("/feed");
     }
   }, [navigate]);
+
 
   return (
     <ThemeProvider theme={createTheme()}>

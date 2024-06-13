@@ -150,8 +150,8 @@ const Header = () => {
     setSearchResults([]);
   };
 
-  const isSeller = localStorage.getItem("IsSeller") === "true";
-  const isBuyer = localStorage.getItem("IsBuyer") === "true";
+  const isSeller = localStorage.getItem("is_doctor") === "true";
+  const isBuyer = localStorage.getItem("is_anonymousUser") === "true";
   const [products, setProducts] = useState({});
   const [selectedProduct, setSelectedProduct] = useState(null);
 
@@ -240,9 +240,7 @@ const Header = () => {
                   alignItems: "center",
                 }}
               >
-
-<Notification/>
-               
+                <Notification />
                 {/* <Notifications /> */}
                 &nbsp;
                 {!isMobile && (

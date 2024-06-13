@@ -1,46 +1,60 @@
 import React, { useState, useEffect } from "react";
-import Header from "../header/header";
-
-import { makeStyles } from "@mui/styles";
-import { Modal, Box } from "@mui/material";
 import {
+  makeStyles,
+  Modal,
+  Box,
   Container,
   Card,
   Typography,
   Button,
   TextField,
   CircularProgress,
-  Grid,
 } from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
-//   root: {
-//     paddingTop: theme.spacing(4),
-//     paddingBottom: theme.spacing(4),
-//   },
-//   card: {
-//     padding: theme.spacing(4),
-//   },
-//   textField: {
-//     marginBottom: theme.spacing(2),
-//   },
-//   buttonGroup: {
-//     marginTop: theme.spacing(2),
-//   },
+  card: {
+    padding: theme.spacing(4),
+    maxWidth: 600,
+    margin: "auto",
+    marginTop: theme.spacing(4),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    textAlign: "center",
+  },
+  inputField: {
+    marginBottom: theme.spacing(2),
+    width: "100%",
+  },
+  buttonGroup: {
+    marginTop: theme.spacing(2),
+  },
+  modalBox: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[24],
+    padding: theme.spacing(4),
+    outline: "none",
+  },
 }));
 
-function DoctorProfileUpdate() {
+const DoctorProfileUpdate = () => {
   const classes = useStyles();
+
   const [profileData, setProfileData] = useState({});
   const [userId, setUserId] = useState("");
   const [profileEditMode, setProfileEditMode] = useState(false);
   const [buyerName, setBuyerName] = useState("");
+  const [buyerEmail, setBuyerEmail] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [initialProfileData, setInitialProfileData] = useState({});
-  const [buyerEmail, setBuyerEmail] = useState("");
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -185,10 +199,7 @@ function DoctorProfileUpdate() {
   };
 
   return (
-    <div>
-
-
-        
+    <Container>
       <Card className={classes.card}>
         <img
           key={profileData.image} // Add key prop here
@@ -198,33 +209,36 @@ function DoctorProfileUpdate() {
               : `http://127.0.0.1:8000${profileData.image}`
           }
           alt="Profile Image"
-          style={{ maxWidth: "100%", width: "300px" }}
+          style={{ maxWidth: "100%", width: "300px", borderRadius: "50%" }}
         />
 
         {profileEditMode && (
-          <div>
-            <input type="file" accept="image/*" onChange={handleImageChange} />
-          </div>
+          <TextField
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className={classes.inputField}
+          />
         )}
-        <hr />
 
         <Typography variant="h6" gutterBottom>
-          username: {buyerName}
+          Username: {buyerName}
         </Typography>
         <Typography variant="h6" gutterBottom>
           Email: {buyerEmail}
         </Typography>
         <Typography variant="h6" gutterBottom>
-          Id: # {profileData.buyer_id}
+          ID: #{profileData.buyer_id}
         </Typography>
 
         <Typography variant="h6" gutterBottom>
-          address:{" "}
+          Address:{" "}
           {profileEditMode ? (
             <TextField
               name="address"
               value={profileData.address}
               onChange={handleInputChange}
+              className={classes.inputField}
             />
           ) : (
             profileData.address
@@ -238,11 +252,13 @@ function DoctorProfileUpdate() {
               name="phone_number"
               value={profileData.phone_number}
               onChange={handleInputChange}
+              className={classes.inputField}
             />
           ) : (
             profileData.phone_number
           )}
         </Typography>
+
         <Typography variant="h6" gutterBottom>
           Bio:{" "}
           {profileEditMode ? (
@@ -250,56 +266,45 @@ function DoctorProfileUpdate() {
               name="bio"
               value={profileData.bio}
               onChange={handleInputChange}
+              className={classes.inputField}
             />
           ) : (
             profileData.bio
           )}
         </Typography>
 
-        {profileEditMode ? (
-          <div className={classes.buttonGroup}>
+        <div className={classes.buttonGroup}>
+          {profileEditMode ? (
             <Button
               variant="contained"
               color="primary"
               onClick={handleSaveButtonClick}
               disabled={loading}
+              className={classes.inputField}
             >
               {loading ? <CircularProgress size={24} /> : "Save"}
             </Button>
-            &nbsp;
-            <Button variant="contained" onClick={handleCancelEdit}>
-              Cancel
-            </Button>
-          </div>
-        ) : (
-          <div className={classes.buttonGroup}>
+          ) : (
             <Button
               variant="contained"
               color="primary"
               onClick={handleEditButtonClick}
+              className={classes.inputField}
             >
               Edit
             </Button>
-            &nbsp; &nbsp; 
-            <Button variant="contained" onClick={handleLogout}>
-              Logout
-            </Button>
-          </div>
-        )}
+          )}
+          <Button
+            variant="contained"
+            onClick={handleLogout}
+            className={classes.inputField}
+          >
+            Logout
+          </Button>
+        </div>
 
         <Modal open={open} onClose={handleClose}>
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: 400,
-              bgcolor: "background.paper",
-              boxShadow: 24,
-              p: 4,
-            }}
-          >
+          <Box className={classes.modalBox}>
             <Typography variant="h6" gutterBottom>
               Are you sure you want to logout?
             </Typography>
@@ -307,11 +312,11 @@ function DoctorProfileUpdate() {
               <Button variant="contained" onClick={handleClose}>
                 Cancel
               </Button>
-              &nbsp;
               <Button
                 variant="contained"
                 color="primary"
                 onClick={handleLogoutConfirm}
+                style={{ marginLeft: "10px" }}
               >
                 Logout
               </Button>
@@ -319,8 +324,8 @@ function DoctorProfileUpdate() {
           </Box>
         </Modal>
       </Card>
-    </div>
+    </Container>
   );
-}
+};
 
 export default DoctorProfileUpdate;

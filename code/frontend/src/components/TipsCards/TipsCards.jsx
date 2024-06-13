@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import Snackbar from '@mui/material/Snackbar';
-import SnackbarContent from '@mui/material/SnackbarContent';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
+import React, { useState, useEffect } from "react";
+import Snackbar from "@mui/material/Snackbar";
+import SnackbarContent from "@mui/material/SnackbarContent";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 const quotes = [
   "Practice mindfulness daily for inner peace and clarity.",
@@ -40,19 +40,22 @@ const TipsCards = () => {
       autoHideDuration={null} // null to keep open until user clicks close
       onClose={handleClose}
       onExited={handleExited}
-      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      anchorOrigin={{ vertical: "top", horizontal: "center" }}
+
     >
       <SnackbarContent
         message={
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center',  padding: '20px', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', maxWidth: '300px', width: '100%', margin: '20px' }}>
+          <div >
             <span>{quotes[currentQuoteIndex]}</span>
             <IconButton
               size="small"
               aria-label="close"
               color="inherit"
               onClick={handleClose}
-              style={{ marginLeft: 'auto', color: '#999' }}
+              style={{ marginLeft: "auto", color: "#999"
+              }}
             >
+              &nbsp;
               <CloseIcon fontSize="small" />
             </IconButton>
           </div>
